@@ -3,12 +3,16 @@
 
 #include "FirstGeneralTask.h"
 #include "SecondGeneralTask.h"
+#include "IndividualTask.h"
+
+using namespace std;
 
 enum class MAIN_MENU 
 {
 	Exit,
 	FirstGeneralTask,
 	SecondGeneralTask,
+	IndividualTask
 };
 
 int main() {
@@ -22,11 +26,22 @@ int main() {
 	{
 		if (q > 0) cin.ignore(32767, '\n');
 		q++;
-		cout << "\n\t\tОбщие задания\n\t1. Задание 1\t2. Задание 2\n\n\t3. Индивидуальное задание\n\tДополнительное задание отсутствует\n\n\t0. Выход\n\n\t";
+		cout << "\n\t\tОбщие задания\n\t1. Задание 1\t2. Задание 2\n\n\t3. Индивидуальное задание 7 вариант\n\n\tДополнительное задание отсутствует\n\n\t0. Выход\n\n\t";
 		char inputNum;
 		cin >> inputNum;
 
-		int L = isInteger(inputNum);
+		int L;
+		try
+		{
+			L = isInteger(inputNum);
+		}
+		catch (const exception& err)
+		{
+			cout << "\n\t" << err.what() << " ... ";
+			char p = _getch();
+			system("cls");
+			continue;
+		}
 
 		system("cls");
 		switch ((MAIN_MENU)L) 
@@ -55,6 +70,22 @@ int main() {
 				try 
 				{
 					secondGeneralTask();
+				}
+				catch (const exception& err)
+				{
+					cout << "\n\t" << err.what() << " ... ";
+					char p = _getch();
+					system("cls");
+					//break;
+				}
+				break;
+			}
+
+			case MAIN_MENU::IndividualTask: 
+			{
+				try 
+				{
+					individualTask();
 				}
 				catch (const exception& err)
 				{

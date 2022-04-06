@@ -1,809 +1,209 @@
 #include "SecondGeneralTask.h"
+#include "ThisIs.h"
 
 #include "Libraries.h"
-
-#include "PrintPublication.h"
-#include "Journal.h"
-#include "Book.h"
-#include "TextBook.h"
 
 enum class secondGeneralTaskMenu
 {
 	Exit,
-	AddJournal,
-	AddBook,
-	AddTextBook,
-	GetJournal,
-	GetBook,
-	GetTextBook,
-	GetAll
+	Addition,
+	Subtraction,
+	Multiplication,
+	Division
 };
 
-enum class createMenu
+class Human
 {
-	Exit,
-	Integer,
-	String
-};
+private:
+	char* Name,
+		* Surname,
+		* Patronymic,
+		* Age,
+		* Gender;
 
-int PrintPublication::counter = 0;
+	int lenName,
+		lenSurname,
+		lenPatronymic,
+		lenAge,
+		lenGender;
+
+public:
+
+	Human()
+	{
+		cout << "\n\tпустой конструктор\n\t";
+
+		this->lenName = 5;
+		this->lenSurname = 7;
+		this->lenPatronymic = 9;
+		this->lenAge = 3;
+		this->lenGender = 8;
+
+		this->Name			= new char[this->lenName];
+		this->Surname		= new char[this->lenSurname];
+		this->Patronymic	= new char[this->lenPatronymic];
+		this->Age			= new char[this->lenAge];
+		this->Gender		= new char[this->lenGender];
+
+		Patronymic[0] = 'И';	Gender[0] = 'м';	Surname[0] = 'И';	Name[0] = 'И';		Age[0] = '2';
+		Patronymic[1] = 'в';	Gender[1] = 'у';	Surname[1] = 'в';	Name[1] = 'в';		Age[1] = '3';
+		Patronymic[2] = 'а';	Gender[2] = 'ж';	Surname[2] = 'а';	Name[2] = 'а';		Age[2] = '\0';
+		Patronymic[3] = 'н';	Gender[3] = 'c';	Surname[3] = 'н';	Name[3] = 'н';
+		Patronymic[4] = 'о';	Gender[4] = 'к';	Surname[4] = 'о';	Name[4] = '\0';
+		Patronymic[5] = 'в';	Gender[5] = 'о';	Surname[5] = 'в';
+		Patronymic[6] = 'и';	Gender[6] = 'й';	Surname[6] = '\0';
+		Patronymic[7] = 'ч';	Gender[7] = '\0';
+		Patronymic[8] = '\0';
+	}
+
+	/*	Human(char Name[], char Surname[], char Patronymic[], char Age[], char Gender[])
+	{
+		this->Name = Name;
+		this->Surname = Surname;
+		this->Patronymic = Patronymic;
+		this->Age = Age;
+		this->Gender = Gender;
+	}*/
+
+	Human(string Name, string Surname, string Patronymic, string Age, string Gender)
+	{
+		cout << "\n\tконструктор с параметрами\n\t";
+
+		lenName = Name.length();
+		lenSurname = Surname.length();
+		lenPatronymic = Patronymic.length();
+		lenAge = Age.length();
+		lenGender = Gender.length();
+
+		this->Name = new char[lenName];
+		this->Surname = new char[lenSurname];
+		this->Patronymic = new char[lenPatronymic];
+		this->Age = new char[lenAge];
+		this->Gender = new char[lenGender];
+
+		for (int i = 0; i < this->lenName; i++)
+			this->Name[i] = Name[i];
+		this->Name[lenName] = '\0';
+
+		for (int i = 0; i < this->lenSurname; i++)
+			this->Surname[i] = Surname[i];
+		this->Surname[lenSurname] = '\0';
+
+		for (int i = 0; i < this->lenPatronymic; i++)
+			this->Patronymic[i] = Patronymic[i];
+		this->Patronymic[lenPatronymic] = '\0';
+
+		for (int i = 0; i < this->lenAge; i++)
+			this->Age[i] = Age[i];
+		this->Age[lenAge] = '\0';
+
+
+		for (int i = 0; i < this->lenGender; i++)
+			this->Gender[i] = Gender[i];
+		this->Gender[lenGender] = '\0';
+		/*
+		this->Name*			= Name.c_str();
+		this->Surname*		= Surname.c_str();
+		this->Patronymic	= Patronymic.c_str();
+		this->Age			= Age.c_str();
+		this->Gender		= Gender.c_str();
+		*/
+	}
+
+	Human(const Human&other)
+	{
+		cout << "\n\tконструктор копирования\n\t";
+
+		this->lenName = other.lenName; 
+		this->lenSurname = other.lenSurname; 
+		this->lenPatronymic = other.lenPatronymic; 
+		this->lenAge = other.lenAge; 
+		this->lenGender = other.lenGender;
+
+		this->Name			= new char[other.lenName];
+		this->Surname		= new char[other.lenSurname];
+		this->Patronymic	= new char[other.lenPatronymic];
+		this->Age			= new char[other.lenAge];
+		this->Gender		= new char[other.lenGender];
+
+		for (int i = 0; i < other.lenName; i++)
+			this->Name[i] = other.Name[i];
+
+		this->Name[other.lenName] = '\0';
+
+
+		for (int i = 0; i < other.lenSurname; i++)
+			this->Surname[i] = other.Surname[i];
+
+		this->Surname[other.lenSurname] = '\0';
+
+
+		for (int i = 0; i < other.lenPatronymic; i++)
+			this->Patronymic[i] = other.Patronymic[i];
+
+		this->Patronymic[other.lenPatronymic] = '\0';
+
+
+		for (int i = 0; i < other.lenAge; i++)
+			this->Age[i] = other.Age[i];
+
+		this->Age[other.lenAge] = '\0';
+
+
+		for (int i = 0; i < other.lenGender; i++)
+			this->Gender[i] = other.Gender[i];
+
+		this->Gender[other.lenGender] = '\0';
+	}
+
+	~Human()
+	{
+		cout << "\n\tdestruct\n\t";
+		delete Name;
+		delete Surname;
+		delete Patronymic;
+		delete Age;
+		delete Gender;
+	}
+
+	void Show()
+	{
+		cout << "\n\tИмя: " << Name << "\n\tФамилия: " << Surname << "\n\tОтчество: "
+			<< Patronymic << "\n\tВозвраст: " << Age << "\n\tПол: " << Gender<<"\n\t";
+	}
+};
 
 void secondGeneralTask()
 {
-	Journal*	Journals		= NULL;
-	Journal*	headJournals	= NULL;
-	Journal*	tailJournals	= NULL;
+	Human *Human_1 = new Human();
+	Human_1->Show();
+	cout << endl;
+	string Name;
+	string Surname;
+	string Patronymic;
+	string Age;
+	string Gender;
 
-	Book*		Books			= NULL;
-	Book*		headBooks		= NULL;
-	Book*		tailBooks		= NULL;
+	cout << "\n\tВведите имя: ";
+	cin>>Name;
 
-	TextBook*	TextBooks		= NULL;
-	TextBook*	headTextBooks	= NULL;
-	TextBook*	tailTextBooks	= NULL;
+	cout << "\n\tВведите фамилию: ";
+	cin>>Surname;
 
-	while (true)
-	{
-		system("cls");
-		cout << "\n\t1 - Добавить журнал\n\t2 - Добавить книгу\n\t3 - Добавить учебник\n\t4 - Вывод всех журналов";
-		cout << "\n\t5 - Вывод всех книг\n\t6 - Вывод всех учебников\n\t7 - Вывод всех печатных изданий\n\t0 - Выход\n\t";
-		char kIn;
-		cin >> kIn;
+	cout << "\n\tВведите отчество: ";
+	cin>>Patronymic;
 
-		int inputInt = isInteger(kIn);
+	cout << "\n\tВведите возвраст: ";	
+	cin>>Age;
 
-		system("cls");
-		switch ((secondGeneralTaskMenu)inputInt)
-		{
-			case secondGeneralTaskMenu::Exit: return;
+	cout << "\n\tВведите пол: ";
+	cin >> Gender;
 
-			case secondGeneralTaskMenu::AddJournal:
-			{
-				string	s_publisher, s_year, s_title, s_number, s_month;
-				int		i_publisher, i_year, i_title, i_number, i_month;
+	Human*Human_2 = new Human(Name, Surname, Patronymic, Age, Gender);
 
-				Journals->newJournal(Journals, headJournals, tailJournals);
+	Human_2->Show();
 
-				#pragma region set_publisher
+	system("pause");
 
-				system("cls");
-				cout << "\n\tТип данных \"Издательтво\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				char kk;
-				cin >> kk;
-
-				int k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-					case createMenu::Exit: break;
-
-					case createMenu::Integer:
-					{
-						cout << "\n\tВведите издательство: ";
-						cin >> i_publisher;
-						Journals->setPublisher_i(i_publisher);
-						break;
-					}
-					case createMenu::String:
-					{
-						cout << "\n\tВведите издательство: ";
-						getline(cin, s_publisher);
-						Journals->setPublisher_s(s_publisher);
-						break;
-					}
-					default: 
-					{
-						cout << "\n\tВведено неверное значение... ";
-						char p = _getch();
-						break;
-					}
-				}
-				
-				#pragma endregion
-
-				#pragma region set_year
-				
-				system("cls");
-				cout << "\n\tТип данных \"Год\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-					case createMenu::Exit: break;
-
-					case createMenu::Integer:
-					{
-						cout << "\n\tВведите год: ";
-						cin >> i_year;
-						Journals->setYear_i(i_year);
-						break;
-					}
-					case createMenu::String:
-					{
-						cout << "\n\tВведите год: ";
-						getline(cin, s_year);
-						Journals->setYear_s(s_year);
-						break;
-					}
-					default:
-					{
-						cout << "\n\tВведено неверное значение... ";
-						char p = _getch();
-						break;
-					}
-				}
-
-				#pragma endregion
-
-				#pragma region set_title
-
-				system("cls");
-				cout << "\n\tТип данных \"Название\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-					case createMenu::Exit: break;
-
-					case createMenu::Integer:
-					{
-						cout << "\n\tВведите название: ";
-						cin >> i_title;
-						Journals->setTitle_i(i_title);
-						break;
-					}
-					case createMenu::String:
-					{
-						cout << "\n\tВведите название: ";
-						getline(cin, s_title);
-						Journals->setTitle_s(s_title);
-						break;
-					}
-					default:
-					{
-						cout << "\n\tВведено неверное значение... ";
-						char p = _getch();
-						break;
-					}
-				}
-
-				#pragma endregion
-
-				#pragma region set_number
-
-				system("cls");
-				cout << "\n\tТип данных \"Номер\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-					case createMenu::Exit: break;
-
-					case createMenu::Integer:
-					{
-						cout << "\n\tВведите номер: ";
-						cin >> i_number;
-						Journals->setNumber_i(i_number);
-						break;
-					}
-					case createMenu::String:
-					{
-						cout << "\n\tВведите номер: ";
-						getline(cin, s_number);
-						Journals->setNumber_s(s_number);
-						break;
-					}
-					default:
-					{
-						cout << "\n\tВведено неверное значение... ";
-						char p = _getch();
-						break;
-					}
-				}
-
-				#pragma endregion
-
-				#pragma region set_month
-
-				system("cls");
-				cout << "\n\tТип данных \"Месяц\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-					case createMenu::Exit: break;
-
-					case createMenu::Integer:
-					{
-						cout << "\n\tВведите месяц: ";
-						cin >> i_month;
-						Journals->setMonth_i(i_month);
-						break;
-					}
-					case createMenu::String:
-					{
-						cout << "\n\tВведите месяц: ";
-						getline(cin, s_month);
-						Journals->setMonth_s(s_month);
-						break;
-					}
-					default:
-					{
-						cout << "\n\tВведено неверное значение... ";
-						char p = _getch();
-						break;
-					}
-				}
-
-				#pragma endregion	
-				break;
-			}
-
-			case secondGeneralTaskMenu::AddBook:
-			{
-				string	s_publisher, s_year, s_title, s_subject, s_author, s_numberOfPages;
-				int		i_publisher, i_year, i_title, i_subject, i_author, i_numberOfPages;
-
-				Books->newBook(Books, headBooks, tailBooks);
-
-				#pragma region set_publisher
-
-				system("cls");
-				cout << "\n\tТип данных \"Издательтво\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				char kk;
-				cin >> kk;
-
-				int k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите издательство: ";
-					cin >> i_publisher;
-					Books->setPublisher_i(i_publisher);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите издательство: ";
-					getline(cin, s_publisher);
-					Books->setPublisher_s(s_publisher);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				
-				#pragma region set_year
-
-				system("cls");
-				cout << "\n\tТип данных \"Год\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите год: ";
-					cin >> i_year;
-					Books->setYear_i(i_year);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите год: ";
-					getline(cin, s_year);
-					Books->setYear_s(s_year);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				
-				#pragma region set_title
-
-				system("cls");
-				cout << "\n\tТип данных \"Название\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите название: ";
-					cin >> i_title;
-					Books->setTitle_i(i_title);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите название: ";
-					getline(cin, s_title);
-					Books->setTitle_s(s_title);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_subject
-
-				system("cls");
-				cout << "\n\tТип данных \"Тематика\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите тематику: ";
-					cin >> i_subject;
-					Books->setSubject_i(i_subject);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите тематику: ";
-					getline(cin, s_subject);
-					Books->setSubject_s(s_subject);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_author
-
-				system("cls");
-				cout << "\n\tТип данных \"Автор\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите автора: ";
-					cin >> i_author;
-					Books->setAuthor_i(i_author);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите автора: ";
-					getline(cin, s_author);
-					Books->setAuthor_s(s_author);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_numberOfPages
-
-				system("cls");
-				cout << "\n\tТип данных \"Количество страниц\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите количество страниц: ";
-					cin >> i_numberOfPages;
-					Books->setNumberOfPages_i(i_numberOfPages);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите количество страниц: ";
-					getline(cin, s_numberOfPages);
-					Books->setNumberOfPages_s(s_numberOfPages);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				break;
-			}
-
-			case secondGeneralTaskMenu::AddTextBook:
-			{
-				string	s_publisher, s_year, s_title, s_subject, s_author, s_numberOfPages, s_purpose;
-				int		i_publisher, i_year, i_title, i_subject, i_author, i_numberOfPages, i_purpose;
-
-				TextBooks->newTextBooks(TextBooks, headTextBooks, tailTextBooks);
-
-				#pragma region set_publisher
-
-				system("cls");
-				cout << "\n\tТип данных \"Издательтво\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				char kk;
-				cin >> kk;
-
-				int k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите издательство: ";
-					cin >> i_publisher;
-					TextBooks->setPublisher_i(i_publisher);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите издательство: ";
-					getline(cin, s_publisher);
-					TextBooks->setPublisher_s(s_publisher);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				
-				#pragma region set_year
-
-				system("cls");
-				cout << "\n\tТип данных \"Год\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите год: ";
-					cin >> i_year;
-					TextBooks->setYear_i(i_year);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите год: ";
-					getline(cin, s_year);
-					TextBooks->setYear_s(s_year);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				
-				#pragma region set_title
-
-				system("cls");
-				cout << "\n\tТип данных \"Название\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите название: ";
-					cin >> i_title;
-					TextBooks->setTitle_i(i_title);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите название: ";
-					getline(cin, s_title);
-					TextBooks->setTitle_s(s_title);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_subject
-
-				system("cls");
-				cout << "\n\tТип данных \"Тематика\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите тематику: ";
-					cin >> i_subject;
-					TextBooks->setSubject_i(i_subject);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите тематику: ";
-					getline(cin, s_subject);
-					TextBooks->setSubject_s(s_subject);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_author
-
-				system("cls");
-				cout << "\n\tТип данных \"Автор\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите автора: ";
-					cin >> i_author;
-					TextBooks->setAuthor_i(i_author);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите автора: ";
-					getline(cin, s_author);
-					TextBooks->setAuthor_s(s_author);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_numberOfPages
-
-				system("cls");
-				cout << "\n\tТип данных \"Количество страниц\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите количество страниц: ";
-					cin >> i_numberOfPages;
-					TextBooks->setNumberOfPages_i(i_numberOfPages);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите количество страниц: ";
-					getline(cin, s_numberOfPages);
-					TextBooks->setNumberOfPages_s(s_numberOfPages);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-
-				#pragma region set_numberOfPages
-
-				system("cls");
-				cout << "\n\tТип данных \"Назначение\":\n\t1 - Целочисленный\n\t2 - Строковый\n\t0 - Выход\n\t";
-				cin >> kk;
-
-				k = isInteger(kk);
-				cin.get();
-				system("cls");
-				switch ((createMenu)k)
-				{
-				case createMenu::Exit: break;
-
-				case createMenu::Integer:
-				{
-					cout << "\n\tВведите назначение: ";
-					cin >> i_purpose;
-					TextBooks->setPurpose_i(i_purpose);
-					break;
-				}
-				case createMenu::String:
-				{
-					cout << "\n\tВведите назначение: ";
-					getline(cin, s_purpose);
-					TextBooks->setPurpose_s(s_purpose);
-					break;
-				}
-				default:
-				{
-					cout << "\n\tВведено неверное значение... ";
-					char p = _getch();
-					break;
-				}
-				}
-
-				#pragma endregion
-				break;
-			}
-
-			case secondGeneralTaskMenu::GetJournal:
-			{
-				Journals->getJournal(Journals, headJournals, tailJournals);
-				cout << "\n\t";
-				char p = _getch();
-				system("cls");
-				break;
-			}
-
-			case secondGeneralTaskMenu::GetBook:
-			{
-				Books->getBook(Books, headBooks, tailBooks);
-				cout << "\n\t";
-				char p = _getch();
-				system("cls");
-				break;
-			}
-
-			case secondGeneralTaskMenu::GetTextBook:
-			{
-				TextBooks->getTextBook(TextBooks, headTextBooks, tailTextBooks);
-				cout << "\n\t";
-				char p = _getch();
-				system("cls");
-				break;
-			}
-
-			case secondGeneralTaskMenu::GetAll:
-			{
-				cout << "\n\n\t\tЖурналы: ";
-				Journals->getJournal(Journals, headJournals, tailJournals);
-
-				cout << "\n\n\t\tКниги: ";
-				Books->getBook(Books, headBooks, tailBooks);
-
-				cout << "\n\n\t\tУчебники: ";
-				TextBooks->getTextBook(TextBooks, headTextBooks, tailTextBooks);
-
-				cout << "\n\n\n\tВсего печатных изделий: " << PrintPublication::getConter() << "\n\n\t\t";
-				char p = _getch();
-				break;
-			}
-
-			default:
-			{
-				cout << "\n\tНеверное значение... ";
-				char p = _getch();
-				system("cls");
-				break;
-			}
-		}
-	}
-
+	return;
 }

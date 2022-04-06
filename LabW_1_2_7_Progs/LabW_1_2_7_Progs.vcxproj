@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FirstGeneralTask.cpp" />
+    <ClCompile Include="IndividualTask.cpp" />
+    <ClCompile Include="PersonClass.cpp" />
+    <ClCompile Include="SecondGeneralTask.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="ThisIs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FirstGeneralTask.h" />
+    <ClInclude Include="FunctionsForAnIndividualTask.h" />
+    <ClInclude Include="IndividualTask.h" />
+    <ClInclude Include="PersonClass.h" />
+    <ClInclude Include="SecondGeneralTask.h" />
+    <ClInclude Include="ThisIs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input_Clients.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pay.html" />
+    <None Include="test.html" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,26 +161,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Book.cpp" />
-    <ClCompile Include="FirstGeneralTask.cpp" />
-    <ClCompile Include="Journal.cpp" />
-    <ClCompile Include="PrintPublication.cpp" />
-    <ClCompile Include="SecondGeneralTask.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="TextBook.cpp" />
-    <ClCompile Include="ThisIs.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Book.h" />
-    <ClInclude Include="FirstGeneralTask.h" />
-    <ClInclude Include="Journal.h" />
-    <ClInclude Include="Libraries.h" />
-    <ClInclude Include="PrintPublication.h" />
-    <ClInclude Include="SecondGeneralTask.h" />
-    <ClInclude Include="TextBook.h" />
-    <ClInclude Include="ThisIs.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
