@@ -8,10 +8,13 @@ using namespace std;
 enum class Massive_Menu
 {
 	Exit,
-	Area,
-	Perimeter,
-	Set,
-	Get
+	AddMass,
+	AddItem,
+	Combine,
+	Remove,
+	Intersection,
+	Return,
+	Size
 };
 
 class IntSetMassive
@@ -112,32 +115,76 @@ public:
 		}
 	}
 	
+	void operator + () const
+	{
 
+	}
 };
 
 bool IntSetMassive::first_ISM = true;
 
 void firstGeneralTask()
 {
-
 	IntSetMassive* head		= NULL;
 	IntSetMassive* tail		= NULL;
 	IntSetMassive* current	= NULL;
 
-	int arr[5] = { 1,2,3,4,5 };
-	int arrr[4] = { 1,2,3,4 };
-	int ar[3] = { 1,2,3 };
+	cout << "\n\t1 - Добавить множество"
+		 << "\n\t2 - Доваить во множество"
+		 << "\n\t3 - Объединить множества"
+		 << "\n\t4 - Удалить число из множества"
+		 << "\n\t5 - Пересечение множеств"
+		 << "\n\t6 - Возвращение эл-та по номеру"
+		 << "\n\t7 - Мощность множества"
+		 << "\n\t0 - Выход\n\t";
+	char j;
+	cin >> j;
+	int Jin = isInteger(j);
 
-	current->createMassive(current, arr, 5);
-	head = current;
-	
-	current->createMassive(current, arr, 5);
-	current->createMassive(current, arrr, 4);
-	current->createMassive(current, ar, 3);
+	switch ((Massive_Menu)Jin)
+	{
+		case Massive_Menu::Exit: return;
 
-	tail = current;
-	current->getMassive(current, head, tail);
+		case Massive_Menu::AddMass:
+		{
 
+		}
+
+		case Massive_Menu::AddItem:
+		{
+
+		}
+
+		case Massive_Menu::Combine:
+		{
+
+		}
+
+		case Massive_Menu::Remove:
+		{
+
+		}
+
+		case Massive_Menu::Intersection:
+		{
+
+		}
+
+		case Massive_Menu::Return:
+		{
+
+		}
+
+		case Massive_Menu::Size:
+		{
+
+		}
+
+		default:
+		{
+
+		}
+	}
 	char p = _getch();
 	system("cls");
 }
