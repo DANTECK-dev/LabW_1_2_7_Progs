@@ -32,7 +32,7 @@ private:
 	Mass* head_M	= NULL;
 	Mass* current_M	= NULL;
 
-	bool first_ISM = true;
+	static bool first_ISM;
 	bool first_M = true;
 
 	
@@ -173,6 +173,8 @@ public:
 		}
 	}
 };
+
+bool IntSetMassive::first_ISM = true;
 
 void firstGeneralTask()
 {
