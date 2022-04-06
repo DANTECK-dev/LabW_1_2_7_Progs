@@ -189,7 +189,9 @@ void firstGeneralTask()
 	head = current;
 	
 	current->createMassive(current, arr, 5);
+
 	current->createMassive(current, arrr, 4);
+
 	current->createMassive(current, ar, 3);
 
 	tail = current;
