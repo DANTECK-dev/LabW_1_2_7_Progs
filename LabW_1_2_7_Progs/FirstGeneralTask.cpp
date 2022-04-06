@@ -172,6 +172,8 @@ public:
 			current_ISM = current_ISM->next_ISM;
 		}
 	}
+	
+
 };
 
 bool IntSetMassive::first_ISM = true;
