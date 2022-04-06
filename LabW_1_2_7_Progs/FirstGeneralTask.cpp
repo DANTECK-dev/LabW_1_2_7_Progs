@@ -35,67 +35,6 @@ private:
 	static bool first_ISM;
 	bool first_M = true;
 
-	
-	/*IntSetMassive()
-	{
-		if (first_ISM == true)
-		{
-			first_ISM = false;
-		}
-
-		else
-		{
-			this->next_ISM = new IntSetMassive;
-			this == this->next_ISM;
-			this->first_ISM = false;
-		}
-
-		if (first_M == true)
-		{
-			current_M = new Mass;
-			head_M = current_M;
-			first_M = false;
-		}
-
-		else
-		{
-			current_M->next_M = new Mass;
-			current_M = current_M->next_M;
-		}
-		
-	current_M->data = 0;
-}*/
-
-	/*IntSetMassive(int val)
-	{
-		if (first_ISM == true)
-		{
-			first_ISM = false;
-		}
-
-		else
-		{
-			this->next_ISM = new IntSetMassive();
-			this == this->next_ISM;
-			this->first_ISM = false;
-		}
-
-		if (first_M == true)
-		{
-			current_M = new Mass();
-			head_M = current_M;
-			first_M = false;
-		}
-
-		else
-		{
-			current_M->next_M = new Mass();
-			current_M = current_M->next_M;
-		}
-
-		current_M->data = val;
-	}*/
-
 	IntSetMassive(int* val, int arr_size)
 	{
 		for (int i = 0; i < arr_size; i++)
@@ -202,37 +141,3 @@ void firstGeneralTask()
 	char p = _getch();
 	system("cls");
 }
-
-
-/*		Mass()
-		{
-			data = 0;
-		}
-
-		Mass(int val)
-		{
-			this->data = val;
-		}
-
-		Mass(int *val)
-		{
-			int size_arr = sizeof(val) / sizeof(val[0]);
-
-			bool first = true;
-
-			for (int i = 0; i < size_arr; i++)
-			{
-				if (headMass == NULL && currentMass == NULL)
-				{
-					currentMass = new Mass(val[i]);
-					headMass = currentMass;
-					first = false;
-				}
-
-				else
-				{
-					currentMass->next = new Mass(val[i]);
-					currentMass = currentMass->next;
-				}
-			}
-		}*/
