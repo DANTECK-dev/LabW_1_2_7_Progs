@@ -153,17 +153,17 @@ public:
 			counter++;
 			cout << "\n\t" << counter << " множество = { ";
 
-			current_M = head_M;
+			current_ISM->current_M = current_ISM->head_M;
 
 			while (true)
 			{
-				cout << current_M->data;
+				cout << current_ISM->current_M->data;
 
-				if (current_M->next_M == NULL) break;
+				if (current_ISM->current_M->next_M == NULL) break;
 
 				cout << ", ";
 
-				current_M = current_M->next_M;
+				current_ISM->current_M = current_ISM->current_M->next_M;
 			}
 
 			cout << " }";
@@ -191,9 +191,7 @@ void firstGeneralTask()
 	head = current;
 	
 	current->createMassive(current, arr, 5);
-
 	current->createMassive(current, arrr, 4);
-
 	current->createMassive(current, ar, 3);
 
 	tail = current;
