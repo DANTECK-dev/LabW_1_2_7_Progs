@@ -40,6 +40,29 @@ private:
 
 	IntSetMassive(int* val, int arr_size)
 	{
+		int* temp = NULL;
+
+		for (int i = 0; i < arr_size; i++)
+		{
+			for (int j = i; j < arr_size; i++)
+			{
+				if (val[i] == val[j])
+				{
+					arr_size--;
+					temp = new int[arr_size];
+
+					for (int k = 0; k < arr_size; k++)
+					{
+						if (val[k] == val[i]) continue;
+						temp[k] = val[k];
+					}
+
+					for (int k = 0; k < arr_size; k++)
+						val[k] = temp[k];
+				}
+			}
+		}
+
 		for (int i = 0; i < arr_size; i++)
 		{
 			if (first_M == true)
@@ -115,8 +138,53 @@ public:
 		}
 	}
 	
-	void operator + () const
+	void operator+(IntSetMassive*& odject, int value) const
 	{
+		//добавить число во множество(типа object + item, где item – целое число), добавляет
+		//	только если такого элемента еще нет во множестве;
+
+
+
+	}
+
+	void operator+(IntSetMassive*& odject_1, IntSetMassive*& odject_2) const
+	{
+		//объединение множеств (типа object1 + object2), возвращает копию множества,
+		//которое является объединением двух множеств - операндов;
+
+
+
+	}
+
+	void operator-(IntSetMassive*& odject, int value) const
+	{
+		//удалить число из множества (типа object - item, где item – целое число)
+
+
+
+	}
+
+	void operator-(IntSetMassive*& odject_1, IntSetMassive*& odject_2) const
+	{
+		//пересечение множеств (типа object1 - object2);
+
+
+
+	}
+
+	void operator[](IntSetMassive*& odject) const
+	{
+		//возвращает элемент по номеру;
+
+
+
+	}
+
+	void operator int() (IntSetMassive*& odject) const
+	{
+		//int () – приведение к целому, возвращает мощность множества (размер массива).
+
+
 
 	}
 };
@@ -139,6 +207,7 @@ void firstGeneralTask()
 		 << "\n\t0 - Выход\n\t";
 	char j;
 	cin >> j;
+	system("cls");
 	int Jin = isInteger(j);
 
 	switch ((Massive_Menu)Jin)
