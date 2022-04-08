@@ -2,6 +2,7 @@
 #include "ThisIs.h"
 #include <iostream>
 #include <conio.h>
+#include <string>
 
 using namespace std;
 
@@ -29,6 +30,8 @@ private:
 	{
 		Mass* next_M = NULL;
 		int data = 0;
+
+		Mass(int val) { data = val; }
 		~Mass() { delete next_M; }
 	};
 
@@ -40,11 +43,11 @@ private:
 
 	IntSetMassive(int* val, int arr_size)
 	{
-		int* temp = NULL;
+		/*int* temp = NULL;
 
 		for (int i = 0; i < arr_size; i++)
 		{
-			for (int j = i; j < arr_size; i++)
+			for (int j = (i + 1); j < arr_size; i++)
 			{
 				if (val[i] == val[j])
 				{
@@ -62,23 +65,23 @@ private:
 				}
 			}
 		}
-
+		*/
 		for (int i = 0; i < arr_size; i++)
 		{
 			if (first_M == true)
 			{
-				current_M = new Mass();
+				current_M = new Mass(val[i]);
 				head_M = current_M;
 				first_M = false;
 			}
 
 			else
 			{
-				current_M->next_M = new Mass();
+				current_M->next_M = new Mass(val[i]);
 				current_M = current_M->next_M;
 			}
 
-			current_M->data = val[i];
+			//current_M->data = val[i];
 		}
 	}
 
@@ -91,6 +94,44 @@ private:
 	}
 
 public:
+
+	IntSetMassive(int val)
+	{
+		if (first_M == true)
+		{
+			current_M = new Mass(val);
+			head_M = current_M;
+			first_M = false;
+		}
+
+		else
+		{
+			current_M->next_M = new Mass(val);
+			current_M = current_M->next_M;
+		}
+	}
+
+	bool currentNext(IntSetMassive*& current_ISM)
+	{
+		if (current_ISM->next_ISM == NULL)
+			return false;
+		else
+		{
+			current_ISM = current_ISM->next_ISM;
+			return true;
+		}
+	}
+
+	bool currentPrev(IntSetMassive*& current_ISM)
+	{
+		if (current_ISM->prev_ISM == NULL)
+			return false;
+		else
+		{
+			current_ISM = current_ISM->prev_ISM;
+			return true;
+		}
+	}
 
 	void createMassive(IntSetMassive*& current_ISM, int* val, int arr_size)
 	{
@@ -111,7 +152,7 @@ public:
 	void getMassive(IntSetMassive *&current_ISM, IntSetMassive *&head_ISM, IntSetMassive *&tail_ISM)
 	{
 		current_ISM = head_ISM;
-		static int counter = 0;
+		int counter = 0;
 
 		while (true)
 		{
@@ -136,27 +177,44 @@ public:
 			if (current_ISM->next_ISM == NULL) break;
 			current_ISM = current_ISM->next_ISM;
 		}
+
 	}
 	
-	void operator+(IntSetMassive*& odject, int value) const
+	void operator+(const int value)
 	{
-		//добавить число во множество(типа object + item, где item – целое число), добавляет
-		//	только если такого элемента еще нет во множестве;
+		Mass * pTemp = this->head_M;
+		if (pTemp == nullptr) {
+			this -> head_M = new Mass(value);
+		}
+		else {
+			while (pTemp->next_M != nullptr) {
 
+				pTemp = pTemp->next_M;
+			}
+			pTemp->next_M = new Mass(value);
+		}
+		/*while (true)
+		{
+			if (this->current_M->next_M == NULL) break;
+			this->current_M = this->current_M->next_M;
+		}
 
-
+		this->current_M->next_M = new Mass(value);
+		this->current_M = this->current_M->next_M;*/
 	}
 
-	void operator+(IntSetMassive*& odject_1, IntSetMassive*& odject_2) const
-	{
+	/*//friend const IntSetMassive& operator+(IntSetMassive& object, int value);
+
+	//friend const void operator + (IntSetMassive& odject_1, const IntSetMassive& odject_2);
+	//{
 		//объединение множеств (типа object1 + object2), возвращает копию множества,
 		//которое является объединением двух множеств - операндов;
 
+	
 
+	//}
 
-	}
-
-	void operator-(IntSetMassive*& odject, int value) const
+	friend const void operator-(IntSetMassive& odject, int value)
 	{
 		//удалить число из множества (типа object - item, где item – целое число)
 
@@ -164,7 +222,7 @@ public:
 
 	}
 
-	void operator-(IntSetMassive*& odject_1, IntSetMassive*& odject_2) const
+	friend const void operator-(IntSetMassive& odject_1, IntSetMassive& odject_2) 
 	{
 		//пересечение множеств (типа object1 - object2);
 
@@ -172,7 +230,7 @@ public:
 
 	}
 
-	void operator[](IntSetMassive*& odject) const
+	friend const int operator[](IntSetMassive& odject, int value)
 	{
 		//возвращает элемент по номеру;
 
@@ -186,8 +244,22 @@ public:
 
 
 
-	}
+	}*/
 };
+
+/*void IntSetMassive::operator+(const int value)
+{
+	while (true)
+	{
+		if (this->current_M->next_M == NULL) break;
+		this->current_M = this->current_M->next_M;
+	}
+
+	this->current_M->next_M = new Mass(value);
+	this->current_M = this->current_M->next_M;
+
+	//return object;
+}*/
 
 bool IntSetMassive::first_ISM = true;
 
@@ -196,64 +268,118 @@ void firstGeneralTask()
 	IntSetMassive* head		= NULL;
 	IntSetMassive* tail		= NULL;
 	IntSetMassive* current	= NULL;
-
-	cout << "\n\t1 - Добавить множество"
-		 << "\n\t2 - Доваить во множество"
-		 << "\n\t3 - Объединить множества"
-		 << "\n\t4 - Удалить число из множества"
-		 << "\n\t5 - Пересечение множеств"
-		 << "\n\t6 - Возвращение эл-та по номеру"
-		 << "\n\t7 - Мощность множества"
-		 << "\n\t0 - Выход\n\t";
-	char j;
-	cin >> j;
-	system("cls");
-	int Jin = isInteger(j);
-
-	switch ((Massive_Menu)Jin)
+	bool first = true;
+	while (true)
 	{
+		cout << "\n\t1 - Добавить множество"
+			 << "\n\t2 - Добавить во множество"
+			 << "\n\t3 - Объединить множества"
+			 << "\n\t4 - Удалить число из множества"
+			 << "\n\t5 - Пересечение множеств"
+			 << "\n\t6 - Возвращение эл-та по номеру"
+			 << "\n\t7 - Мощность множества"
+			 << "\n\t0 - Выход\n\t";
+		char j;
+		cin >> j;
+		system("cls");
+		int Jin = isInteger(j);
+
+		switch ((Massive_Menu)Jin)
+		{
 		case Massive_Menu::Exit: return;
 
 		case Massive_Menu::AddMass:
 		{
+			if (current == NULL && head == NULL && tail == NULL)
+			{
+				cout << "\n\tДобавление нового множества\n\tВведите размер множества: ";
+				int* arr, arr_size;
+				cin >> arr_size;
+				arr = new int[arr_size];
 
+				for (int i = 0; i < arr_size; i++)
+					cin >> arr[i];
+				if (first == true)
+				{
+					current->createMassive(current, arr, arr_size);
+					head = current;
+					tail = current;
+					first = false;
+				}
+
+				else
+				{
+					current->createMassive(current, arr, arr_size);
+					tail = current;
+				}
+			}
+			break;
 		}
 
 		case Massive_Menu::AddItem:
 		{
+			current->getMassive(current, head, tail);
 
+			cout << "\n\tВведите номер номер множества: ";
+			char LL;
+			cin >> LL;
+			int L = isInteger(LL);
+			L--;
+
+			cin.get();
+			cout << "\n\tВведите число: ";
+			char KK[100];
+			cin.getline(KK, 100);
+			int K = isInteger_l(KK);
+
+			current = head;
+			
+			for (int i = 0; i < L; i++)
+			{
+				if (!current->currentNext(current)) break;
+			}
+
+			current->operator+(K);
+			current->getMassive(current, head, tail);
+			break;
 		}
 
 		case Massive_Menu::Combine:
 		{
 
+			break;
 		}
 
 		case Massive_Menu::Remove:
 		{
 
+			break;
 		}
 
 		case Massive_Menu::Intersection:
 		{
 
+			break;
 		}
 
 		case Massive_Menu::Return:
 		{
 
+			break;
 		}
 
 		case Massive_Menu::Size:
 		{
 
+			break;
 		}
 
 		default:
 		{
 
+			break;
+		}
 		}
 	}
-	char p = _getch();
 	system("cls");
 }
