@@ -23,6 +23,8 @@ class IntSetMassive
 
 public:
 
+	IntSetMassive(int* val, int arr_size);
+	~IntSetMassive();
 	IntSetMassive(int val);
 	bool currentNext(IntSetMassive*& current_ISM);
 	bool currentPrev(IntSetMassive*& current_ISM);
@@ -32,12 +34,10 @@ public:
 	void operator+(const IntSetMassive& object);
 	void operator-(const int value);
 	void operator-(const IntSetMassive& object);
+	int& operator[](const int index);
 	int sizeMass(const IntSetMassive*& object);
 
 private:
-
-	IntSetMassive(int* val, int arr_size);
-	~IntSetMassive();
 
 	IntSetMassive* next_ISM = NULL;
 	IntSetMassive* prev_ISM = NULL;
@@ -57,6 +57,22 @@ private:
 	static bool first_ISM;
 	bool first_M = true;
 };
+
+IntSetMassive::IntSetMassive(int val)
+{
+	if (first_M == true)
+	{
+		current_M = new Mass(val);
+		head_M = current_M;
+		first_M = false;
+	}
+
+	else
+	{
+		current_M->next_M = new Mass(val);
+		current_M = current_M->next_M;
+	}
+}
 
 IntSetMassive::IntSetMassive(int* val, int arr_size)
 {
@@ -108,22 +124,6 @@ IntSetMassive::~IntSetMassive()
 	delete prev_ISM;
 	delete head_M;
 	delete current_M;
-}
-
-IntSetMassive::IntSetMassive(int val)
-{
-	if (first_M == true)
-	{
-		current_M = new Mass(val);
-		head_M = current_M;
-		first_M = false;
-	}
-
-	else
-	{
-		current_M->next_M = new Mass(val);
-		current_M = current_M->next_M;
-	}
 }
 
 bool IntSetMassive::currentNext(IntSetMassive*& current_ISM)
@@ -211,16 +211,16 @@ void IntSetMassive::operator+(const int value)
 		pTemp->next_M = new Mass(value);
 	}*/
 
-	if (this == NULL) cout << "\n\tЭтого множества не существует\n\t"; return;
+	if (TempMass == NULL) cout << "\n\tЭтого множества не существует\n\t"; return;
 
 	while (true)
 	{
-		if (this->current_M->next_M == NULL) break;
-		this->current_M = this->current_M->next_M;
+		if (TempMass->next_M == NULL) break;
+		TempMass = TempMass->next_M;
 	}
 
-	this->current_M->next_M = new Mass(value);
-	this->current_M = this->current_M->next_M;
+	TempMass->next_M = new Mass(value);
+	TempMass = TempMass->next_M;
 }
 
 void IntSetMassive::operator+(const IntSetMassive& object)
@@ -236,10 +236,28 @@ void IntSetMassive::operator+(const IntSetMassive& object)
 	int counter = 0;
 	int* mass = new int [counter];
 
+
+	while (true)
+	{
+		if (Last == NULL) Last = new IntSetMassive(TempMass1->data);
+		else Last->current_M->next_M = new Mass(TempMass1->data);
+		if (TempMass1->next_M == nullptr) break;
+		TempMass1 = TempMass1->next_M;
+	}
+
+	while (true)
+	{
+		if (Last == NULL) Last = new IntSetMassive(TempMass2->data);
+		else Last->current_M->next_M = new Mass(TempMass2->data);
+		if (TempMass2->next_M == nullptr) break;
+		TempMass2 = TempMass2->next_M;
+	}
+
+
 	/*if (this == NULL) { cout << "\n\t1 множества не существует\n\t"; return; }
 	if (object.head_M == NULL && object.head_M == NULL) { cout << "\n\t2 множества не существует или оно пустое\n\t"; return; }*/
 
-	while (TempMass1 != nullptr)
+	/*while (TempMass1 != nullptr)
 	{
 		counter++;
 		int *temp = new int[counter];
@@ -267,7 +285,7 @@ void IntSetMassive::operator+(const IntSetMassive& object)
 		if (fTemp->next_ISM == NULL) break;
 		fTemp = fTemp->next_ISM;
 	}
-	fTemp->next_ISM = Last;
+	fTemp->next_ISM = Last;*/
 }
 
 void IntSetMassive::operator-(const int value)
@@ -286,12 +304,14 @@ void IntSetMassive::operator-(const IntSetMassive& object)
 
 }
 
-int IntSetMassive::operator[](int value)
+int& IntSetMassive::operator[](int value)
 {
 	//возвращает элемент по номеру;
+	int value = 0;
 
 
 
+	return value;
 }
 
 int IntSetMassive::sizeMass (const IntSetMassive*& object)
