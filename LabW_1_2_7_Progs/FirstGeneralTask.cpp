@@ -92,7 +92,7 @@ IntSetMassive::IntSetMassive(int* val, int arr_size)
 					if (val[k] == val[i]) continue;
 					temp[k] = val[k];
 				}
-
+				//hjgvbm,n.m
 				for (int k = 0; k < arr_size; k++)
 					val[k] = temp[k];
 			}
