@@ -65,6 +65,15 @@ string CannedProduct::getCannedProduct() {
 	return getGeneral() + " Консерва: " 
 		+ tempOpen + "Срок годности: " + tempExpiration;
 }
+void CannedProduct::setCannedProduct(string name,
+	string companyName,
+	int price,
+	int weight) {
+	setName(name);
+	setCompanyName(companyName);
+	setPrice(price);
+	setWeight(weight);
+}
 #pragma endregion 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,6 +90,15 @@ string FreshProduct::getFreshProduct() {
 		return "None";
 	return getGeneral() + " Срок годности: " + to_string(expirationDate);
 }
+void FreshProduct::setFreshProduct(string name,
+	string companyName,
+	int price,
+	int weight) {
+	setName(name);
+	setCompanyName(companyName);
+	setPrice(price);
+	setWeight(weight);
+}
 #pragma endregion 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +114,30 @@ string FoodProduct::getFoodProduct() {
 		return getFreshProduct();
 	else
 		return "None";
+}
+void FoodProduct::setFoodProduct(string name,
+	string companyName,
+	int price,
+	int weight,
+	int expirationDateInOpenState,
+	int expirationDateInCloseState,
+	bool open,
+	int expirationDate) {
+	if (expirationDate != 0) {
+		setExpirationDate(expirationDate);
+		setFreshProduct(name, companyName, price, weight);
+	}
+	else if(open == true) {
+		setExpirationDateInOpenState(expirationDateInOpenState);
+		setOpen(open);
+		setCannedProduct(name, companyName, price, weight);
+	}
+	else {
+		setExpirationDateInCloseState(expirationDateInCloseState);
+		setOpen(open);
+		setCannedProduct(name, companyName, price, weight);
+	}
+
 }
 #pragma endregion 
 

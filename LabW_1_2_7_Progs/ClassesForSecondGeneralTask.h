@@ -28,6 +28,10 @@ public:
 	void setExpirationDateInCloseState(int expirationDateInCloseState);
 	void setOpen(bool open);
 	string getCannedProduct();
+	void setCannedProduct(string name,
+		string companyName,
+		int price,
+		int weight);
 };
 
 
@@ -38,6 +42,10 @@ public:
 	FreshProduct();
 	void setExpirationDate(int expirationDate);
 	string getFreshProduct();
+	void setFreshProduct(string name,
+		string companyName,
+		int price,
+		int weight);
 };
 
 
@@ -47,6 +55,14 @@ protected:
 public:
 	int getExpirationDate();
 	string getFoodProduct();
+	void setFoodProduct(string name,
+		string companyName,
+		int price,
+		int weight,
+		int expirationDateInOpenState,
+		int expirationDateInCloseState, 
+		bool open,
+		int expirationDate);
 };
 
 

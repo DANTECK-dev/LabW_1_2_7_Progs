@@ -19,9 +19,9 @@ void secondGeneralTask()
 {
 	int counter = 0;
 	const int size = 10;
-	Product** products[size];
-	for (int i = 0; i < size; i++)
-		products[i] = NULL;
+	Product* products = new Product[size];
+	//for (int i = 0; i < size; i++)
+		//products[i] = new Product;
 	while (true) {
 		system("cls");
 		string	productType					= { "None" };
@@ -83,7 +83,10 @@ void secondGeneralTask()
 										continue;
 									}
 								}
-
+								products[counter].setProduct(name, companyName, price, weight, open,
+									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
+									typeOfComponent, productType);
+								counter++;
 							}
 							case (2): {
 								cout << "\n\tДобавить свежий продукт";
@@ -116,9 +119,10 @@ void secondGeneralTask()
 				break; 
 			}
 			case (2): {
-				for (int i = 0; i < size; i++) {
-					if (products[i] != NULL)
-						cout << "\n\t"<< string(products[i]);
+
+				for (int i = 0; i < counter; i++) {
+					string temp = products[i](products[i]);
+					cout << "\n\t" << temp.(products[i]);
 				}
 				cout << "\n\t";
 				system("pause");
