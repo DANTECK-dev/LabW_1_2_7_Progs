@@ -1,5 +1,5 @@
 #include "SecondGeneralTask.h"
-#include "ThisIs.h"
+#include "ClassesForSecondGeneralTask.h"
 
 #include "Libraries.h"
 
