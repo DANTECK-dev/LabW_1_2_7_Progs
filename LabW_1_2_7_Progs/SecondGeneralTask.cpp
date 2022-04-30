@@ -93,6 +93,10 @@ void secondGeneralTask()
 								inputGeneral(name, companyName, price, weight);
 								cout << "\n\tСрок годности: ";
 								cin >> expirationDate;
+								products[counter].setProduct(name, companyName, price, weight, open,
+									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
+									typeOfComponent, productType);
+								counter++;
 							}
 							default: {
 								cout << "\n\tОшибка ввода \n\n\t";
@@ -108,6 +112,10 @@ void secondGeneralTask()
 						cin >> productType;
 						cout << "\n\tТип комплетующего: ";
 						cin >> typeOfComponent;
+						products[counter].setProduct(name, companyName, price, weight, open,
+							expirationDateInCloseState, expirationDateInOpenState, expirationDate,
+							typeOfComponent, productType);
+						counter++;
 
 					}
 					default: {
