@@ -10,6 +10,12 @@ General::General() {
 	price = 0;
 	weight = 0;
 }
+General::General(string name, string companyName, int price, int weight) {
+	this->name = name;
+	this->companyName = companyName;
+	this->price = price;
+	this->weight = weight;
+}
 void General::setName(string name) {
 	this->name = name;
 }
@@ -34,9 +40,17 @@ string General::getGeneral() {
 
 #pragma region CannedProduct
 CannedProduct::CannedProduct() {
+	this->General::General();
 	expirationDateInOpenState = 0;
 	expirationDateInCloseState = 0;
 	open = false;
+}
+CannedProduct::CannedProduct(string name, string companyName, int price, int weight, 
+	int expirationDateInOpenState, int expirationDateInCloseState, bool open) {
+	General::General(name, companyName, price, weight);
+	this->expirationDateInOpenState = expirationDateInOpenState;
+	this->expirationDateInCloseState = expirationDateInCloseState;
+	this->open = open;
 }
 void CannedProduct::setExpirationDateInOpenState(int expirationDateInOpenState) {
 	this->expirationDateInOpenState = expirationDateInOpenState;
@@ -65,10 +79,7 @@ string CannedProduct::getCannedProduct() {
 	return getGeneral() + " Консерва: " 
 		+ tempOpen + "Срок годности: " + tempExpiration;
 }
-void CannedProduct::setCannedProduct(string name,
-	string companyName,
-	int price,
-	int weight) {
+void CannedProduct::setCannedProduct(string name, string companyName, int price, int weight) {
 	setName(name);
 	setCompanyName(companyName);
 	setPrice(price);
@@ -80,6 +91,7 @@ void CannedProduct::setCannedProduct(string name,
 
 #pragma region FreshProduct
 FreshProduct::FreshProduct() {
+	this->General::General();
 	expirationDate = 0;
 }
 void FreshProduct::setExpirationDate(int expirationDate) {
@@ -90,10 +102,7 @@ string FreshProduct::getFreshProduct() {
 		return "None";
 	return getGeneral() + " Срок годности: " + to_string(expirationDate);
 }
-void FreshProduct::setFreshProduct(string name,
-	string companyName,
-	int price,
-	int weight) {
+void FreshProduct::setFreshProduct(string name, string companyName, int price, int weight) {
 	setName(name);
 	setCompanyName(companyName);
 	setPrice(price);
@@ -104,6 +113,10 @@ void FreshProduct::setFreshProduct(string name,
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region FoodProduct
+FoodProduct::FoodProduct() {
+	this->CannedProduct::CannedProduct();
+	this->FreshProduct::FreshProduct();
+}
 int FoodProduct::getExpirationDate() {
 	return expirationDate + expirationDateInCloseState + expirationDateInOpenState;
 }
@@ -115,14 +128,8 @@ string FoodProduct::getFoodProduct() {
 	else
 		return "None";
 }
-void FoodProduct::setFoodProduct(string name,
-	string companyName,
-	int price,
-	int weight,
-	int expirationDateInOpenState,
-	int expirationDateInCloseState,
-	bool open,
-	int expirationDate) {
+void FoodProduct::setFoodProduct(string name, string companyName, int price, int weight,
+	int expirationDateInOpenState, int expirationDateInCloseState, bool open, int expirationDate) {
 	if (expirationDate != 0) {
 		setExpirationDate(expirationDate);
 		setFreshProduct(name, companyName, price, weight);
@@ -145,6 +152,7 @@ void FoodProduct::setFoodProduct(string name,
 
 #pragma region Accessories
 Accessories::Accessories() {
+	this->General::General();
 	typeOfComponent = { "None" };
 }
 void Accessories::setTypeOfComponent(string typeOfComponent) {
@@ -156,10 +164,7 @@ string Accessories::getAccessories() {
 	return getGeneral() + " Тип компонета: " + typeOfComponent;
 	
 }
-void Accessories::setAccessories(string name,
-		string companyName,
-		int price,
-		int weight) {
+void Accessories::setAccessories(string name, string companyName, int price, int weight) {
 		setName(name);
 		setCompanyName(companyName);
 		setPrice(price);
@@ -171,6 +176,7 @@ void Accessories::setAccessories(string name,
 
 #pragma region ElectronicGoods
 ElectronicGoods::ElectronicGoods() {
+	this->Accessories::Accessories();
 	productType = { "None" };
 }
 void ElectronicGoods::setProductType(string productType) {
@@ -181,12 +187,7 @@ string ElectronicGoods::getElectronicGoods() {
 		return "None";
 	return getAccessories() + " Тип электроники " + productType;
 }
-void ElectronicGoods::setElectronicGoods(
-	string name,
-	string companyName,
-	int price,
-	int weight,
-	string typeOfComponent) {
+void ElectronicGoods::setElectronicGoods(string name, string companyName, int price, int weight, string typeOfComponent) {
 	setTypeOfComponent(typeOfComponent);
 	setAccessories(name, companyName, price, weight);
 }
@@ -195,25 +196,22 @@ void ElectronicGoods::setElectronicGoods(
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region Product
-string Product::operator() (const Product& other) {
-	Product Ptemp = other;
-	if (Ptemp.getElectronicGoods() != "None")
-		return getElectronicGoods() + "Тип электронного продукта: " + other.productType + " ";
-	if(Ptemp.getFoodProduct() != "None")
-		return getFoodProduct() + "Тип электронного продукта: " + other.productType + " ";
+Product::operator string() const {
+	Product *Ptemp = const_cast<Product*>(this);
+	if (Ptemp->getElectronicGoods() != "None")
+		return Ptemp->getElectronicGoods() + "Тип электронного продукта: " + Ptemp->productType + " ";
+	if(Ptemp->getFoodProduct() != "None")
+		return Ptemp->getFoodProduct() + "Тип электронного продукта: " + Ptemp->productType + " ";
 }
-void Product::setProduct(
-	string name,
-	string companyName,
-	int price,
-	int weight,
-	bool open,
-	int expirationDateInCloseState,
-	int expirationDateInOpenState,
-	int expirationDate,
-	string typeOfComponent,
-	string productType) {
-	if (productType != "None") 
+Product::Product() {
+	this->ElectronicGoods::ElectronicGoods();
+	this->FoodProduct::FoodProduct();
+	this->next = NULL;
+	this->prev = NULL;
+}
+void Product::setProduct(string name, string companyName, int price, int weight, bool open, int expirationDateInCloseState, 
+	int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType) {
+	if (productType != "None")
 		setProductType(productType);
 	setElectronicGoods(name, companyName, price, weight, typeOfComponent);
 }

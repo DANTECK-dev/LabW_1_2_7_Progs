@@ -15,13 +15,27 @@ void inputGeneral(string &name, string &companyName, int &price, int &weight) {
 	cin >> weight;
 }
 
+void newProduct(Product*& Current, Product*& Head) {
+	if (Current == NULL) {
+		Current = new Product;
+		Head = Current;
+	}
+	else if (Current->next == NULL) {
+		Current->next = new Product;
+		Current = Current->next;
+	}
+}
 void secondGeneralTask()
 {
 	int counter = 0;
 	const int size = 10;
-	Product* products = new Product[size];
-	//for (int i = 0; i < size; i++)
-		//products[i] = new Product;
+	Product* products = NULL;
+	Product* head = NULL;
+	/*Product* products = static_cast<Product*>(operator new[](size * sizeof(Product)));
+	//Product** products = new Product*[size];
+	for (int i = 0; i < size; i++)
+		new (products + i) Product();
+		//products[i] = new Product();*/
 	while (true) {
 		system("cls");
 		string	productType					= { "None" };
@@ -55,7 +69,7 @@ void secondGeneralTask()
 						cout << "\n\tДобавить продукт питания"
 							<< "\n\t1 - Консервированный продукт"
 							<< "\n\t2 - Свежий продукт"
-							<< "\n\t0 - Выход";
+							<< "\n\t0 - Выход\n\t";
 						cin >> inputNum;
 						system("cls");
 						switch (inputNum) {
@@ -71,11 +85,13 @@ void secondGeneralTask()
 										open = true;
 										cout << "\n\tСрок годности(открытой консервы): ";
 										cin >> expirationDateInOpenState;
+										break;
 									}
 									case(2): {
 										open = false;
 										cout << "\n\tСрок годности(закрытой консервы): ";
 										cin >> expirationDateInCloseState;
+										break;
 									}
 									default: {
 										cout << "\n\tОшибка ввода \n\n\t";
@@ -83,20 +99,24 @@ void secondGeneralTask()
 										continue;
 									}
 								}
-								products[counter].setProduct(name, companyName, price, weight, open,
+								newProduct(products, head);
+								products->setProduct(name, companyName, price, weight, open,
 									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
 									typeOfComponent, productType);
 								counter++;
+								break;
 							}
 							case (2): {
 								cout << "\n\tДобавить свежий продукт";
 								inputGeneral(name, companyName, price, weight);
 								cout << "\n\tСрок годности: ";
 								cin >> expirationDate;
-								products[counter].setProduct(name, companyName, price, weight, open,
+								newProduct(products, head);
+								products->setProduct(name, companyName, price, weight, open,
 									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
 									typeOfComponent, productType);
 								counter++;
+								break;
 							}
 							default: {
 								cout << "\n\tОшибка ввода \n\n\t";
@@ -104,6 +124,7 @@ void secondGeneralTask()
 								continue;
 							}
 						}
+						break;
 					}
 					case (2): {
 						cout << "\n\tДобавить электронный продукт";
@@ -112,11 +133,12 @@ void secondGeneralTask()
 						cin >> productType;
 						cout << "\n\tТип комплетующего: ";
 						cin >> typeOfComponent;
-						products[counter].setProduct(name, companyName, price, weight, open,
+						newProduct(products, head);
+						products->setProduct(name, companyName, price, weight, open,
 							expirationDateInCloseState, expirationDateInOpenState, expirationDate,
 							typeOfComponent, productType);
 						counter++;
-
+						break;
 					}
 					default: {
 						cout << "\n\tОшибка ввода \n\n\t";
@@ -127,10 +149,11 @@ void secondGeneralTask()
 				break; 
 			}
 			case (2): {
-
-				for (int i = 0; i < counter; i++) {
-					string temp = products[i](products[i]);
-					cout << "\n\t" << temp.(products[i]);
+				products = head;
+				while (products != NULL) {
+					string temp = *products;
+					cout << "\n\t" << temp;
+					products = products->next;
 				}
 				cout << "\n\t";
 				system("pause");

@@ -9,6 +9,7 @@ protected:
 	int		weight;
 public:
 	General();
+	General(string name, string companyName, int price, int weight);
 	void setName(string name);
 	void setCompanyName(string companyName);
 	void setPrice(int price);
@@ -24,6 +25,8 @@ protected:
 	bool open;
 public:
 	CannedProduct();
+	CannedProduct(string name, string companyName, int price, int weight,
+		int expirationDateInOpenState, int expirationDateInCloseState, bool open);
 	void setExpirationDateInOpenState(int expirationDateInOpenState);
 	void setExpirationDateInCloseState(int expirationDateInCloseState);
 	void setOpen(bool open);
@@ -53,6 +56,7 @@ class FoodProduct : CannedProduct , FreshProduct{
 protected:
 	//Абстрактный класс
 public:
+	FoodProduct();
 	int getExpirationDate();
 	string getFoodProduct();
 	void setFoodProduct(string name,
@@ -97,10 +101,12 @@ public:
 
 
 class Product : FoodProduct, ElectronicGoods{
-private:
-	//Абстрактный класс
-	string operator() (const Product& other);
 public:
+	//Абстрактный класс
+	Product* next = NULL;
+	Product* prev = NULL;
+	Product();
+	operator string () const;
 	void setProduct (
 		string name,
 		string companyName,
