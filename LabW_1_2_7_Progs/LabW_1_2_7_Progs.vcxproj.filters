@@ -13,72 +13,72 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\0MainAndOther">
+    <Filter Include="Исходные файлы\2_SecondGeneralTask">
+      <UniqueIdentifier>{6414e938-0c82-431a-8876-890b0995da19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\0_MainAndOther">
       <UniqueIdentifier>{c7edf47e-5995-4301-878c-5ab7c6fa4c28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\1FirstGeneralTask">
-      <UniqueIdentifier>{39a00fbb-a73d-4afc-837f-23f817cdb063}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\3IndividualTask">
-      <UniqueIdentifier>{9dc3027e-4132-401f-b871-84688ee010af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\4AdditionalTask">
+    <Filter Include="Исходные файлы\4_AdditionalTask">
       <UniqueIdentifier>{019c8535-602a-44eb-830e-43e21d0e97ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\2SecondGeneralTask">
-      <UniqueIdentifier>{6414e938-0c82-431a-8876-890b0995da19}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\3_IndividualTask">
+      <UniqueIdentifier>{9dc3027e-4132-401f-b871-84688ee010af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\1_FirstGeneralTask">
+      <UniqueIdentifier>{39a00fbb-a73d-4afc-837f-23f817cdb063}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FirstGeneralTask.cpp">
-      <Filter>Исходные файлы\1FirstGeneralTask</Filter>
+      <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
     </ClCompile>
     <ClCompile Include="ClassesForSecondGeneralTask.cpp">
-      <Filter>Исходные файлы\2SecondGeneralTask</Filter>
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClCompile>
     <ClCompile Include="SecondGeneralTask.cpp">
-      <Filter>Исходные файлы\2SecondGeneralTask</Filter>
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClCompile>
     <ClCompile Include="IndividualTask.cpp">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClCompile>
     <ClCompile Include="ListOfBuyers.cpp">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClCompile>
     <ClCompile Include="PersonClass.cpp">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
-      <Filter>Исходные файлы\0MainAndOther</Filter>
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
     </ClCompile>
     <ClCompile Include="ThisIs.cpp">
-      <Filter>Исходные файлы\0MainAndOther</Filter>
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FirstGeneralTask.h">
-      <Filter>Исходные файлы\1FirstGeneralTask</Filter>
+      <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
     </ClInclude>
     <ClInclude Include="ClassesForSecondGeneralTask.h">
-      <Filter>Исходные файлы\2SecondGeneralTask</Filter>
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClInclude>
     <ClInclude Include="SecondGeneralTask.h">
-      <Filter>Исходные файлы\2SecondGeneralTask</Filter>
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClInclude>
     <ClInclude Include="FunctionsForAnIndividualTask.h">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClInclude>
     <ClInclude Include="IndividualTask.h">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClInclude>
     <ClInclude Include="ListOfBuyers.h">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClInclude>
     <ClInclude Include="ThisIs.h">
-      <Filter>Исходные файлы\0MainAndOther</Filter>
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
     </ClInclude>
     <ClInclude Include="PersonClass.h">
-      <Filter>Исходные файлы\3IndividualTask</Filter>
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
