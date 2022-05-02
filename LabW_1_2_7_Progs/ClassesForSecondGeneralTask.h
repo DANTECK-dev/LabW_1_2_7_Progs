@@ -10,11 +10,11 @@ protected:
 public:
 	General();
 	General(string name, string companyName, int price, int weight);
-	void setName(string name);
+	string getGeneral();
+	/*void setName(string name);
 	void setCompanyName(string companyName);
 	void setPrice(int price);
-	void setWeight(int weight);
-	string getGeneral();
+	void setWeight(int weight);*/
 };
 
 
@@ -27,14 +27,14 @@ public:
 	CannedProduct();
 	CannedProduct(string name, string companyName, int price, int weight,
 		int expirationDateInOpenState, int expirationDateInCloseState, bool open);
-	void setExpirationDateInOpenState(int expirationDateInOpenState);
+	string getCannedProduct();
+	/*void setExpirationDateInOpenState(int expirationDateInOpenState);
 	void setExpirationDateInCloseState(int expirationDateInCloseState);
 	void setOpen(bool open);
-	string getCannedProduct();
 	void setCannedProduct(string name,
 		string companyName,
 		int price,
-		int weight);
+		int weight);*/
 };
 
 
@@ -43,30 +43,31 @@ protected:
 	int expirationDate;
 public:
 	FreshProduct();
-	void setExpirationDate(int expirationDate);
+	FreshProduct(string name, string companyName, int price, int weight, int expirationDate);
 	string getFreshProduct();
+	/*void setExpirationDate(int expirationDate);
 	void setFreshProduct(string name,
 		string companyName,
 		int price,
-		int weight);
+		int weight);*/
 };
 
 
 class FoodProduct : CannedProduct , FreshProduct{
-protected:
-	//Абстрактный класс
 public:
 	FoodProduct();
-	int getExpirationDate();
+	FoodProduct(string name, string companyName, int price, int weight,
+		int expirationDateInOpenState, int expirationDateInCloseState, bool open, int expirationDate);
+	virtual int getExpirationDate();
 	string getFoodProduct();
-	void setFoodProduct(string name,
+	/*void setFoodProduct(string name,
 		string companyName,
 		int price,
 		int weight,
 		int expirationDateInOpenState,
 		int expirationDateInCloseState, 
 		bool open,
-		int expirationDate);
+		int expirationDate);*/
 };
 
 
@@ -75,12 +76,13 @@ protected:
 	string typeOfComponent;	// of which it is a part
 public:
 	Accessories();
-	void setTypeOfComponent(string typeOfComponent);
+	Accessories(string name, string companyName, int price, int weight, string typeOfComponent);
 	string getAccessories();
+	/*void setTypeOfComponent(string typeOfComponent);
 	void setAccessories(string name,
 		string companyName,
 		int price,
-		int weight);
+		int weight);*/
 };
 
 
@@ -89,24 +91,31 @@ protected:
 	string productType;
 public:
 	ElectronicGoods();
-	void setProductType(string productType);
+	ElectronicGoods(string name, string companyName, int price,
+		int weight, string typeOfComponent, string productType);
 	string getElectronicGoods();
+	/*void setProductType(string productType);
 	void setElectronicGoods(
 		string name,
 		string companyName,
 		int price,
 		int weight,
-		string typeOfComponent);
+		string typeOfComponent);*/
 };
 
 
-class Product : FoodProduct, ElectronicGoods{
+class Product : public FoodProduct, public ElectronicGoods{
 public:
 	//Абстрактный класс
 	Product* next = NULL;
 	Product* prev = NULL;
 	Product();
+	int getExpirationDate() {return FoodProduct::getExpirationDate();}
+	Product(string name, string companyName, int price, int weight, bool open, int expirationDateInCloseState,
+		int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType);
 	operator string () const;
+	/*void newProduct(string name, string companyName, int price, int weight, bool open, int expirationDateInCloseState,
+		int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType);
 	void setProduct (
 		string name,
 		string companyName,
@@ -118,5 +127,5 @@ public:
 		int expirationDate,
 		string typeOfComponent,
 		string productType
-	);
+	);*/
 };

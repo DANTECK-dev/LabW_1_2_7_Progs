@@ -15,13 +15,17 @@ void inputGeneral(string &name, string &companyName, int &price, int &weight) {
 	cin >> weight;
 }
 
-void newProduct(Product*& Current, Product*& Head) {
+void newProduct(Product*& Current, Product*& Head, string name, string companyName, 
+	int price, int weight, bool open, int expirationDateInCloseState,
+	int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType) {
 	if (Current == NULL) {
-		Current = new Product;
+		Current = new Product(name, companyName, price, weight, open, expirationDateInCloseState,
+			expirationDateInOpenState, expirationDate, typeOfComponent, productType);
 		Head = Current;
 	}
 	else if (Current->next == NULL) {
-		Current->next = new Product;
+		Current->next = new Product(name, companyName, price, weight, open, expirationDateInCloseState,
+			expirationDateInOpenState, expirationDate, typeOfComponent, productType);
 		Current = Current->next;
 	}
 }
@@ -99,10 +103,9 @@ void secondGeneralTask()
 										continue;
 									}
 								}
-								newProduct(products, head);
-								products->setProduct(name, companyName, price, weight, open,
-									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
-									typeOfComponent, productType);
+								newProduct(products, head, name, companyName, price, weight,
+									open, expirationDateInCloseState, expirationDateInOpenState,
+									expirationDate, typeOfComponent, productType);
 								counter++;
 								break;
 							}
@@ -111,10 +114,9 @@ void secondGeneralTask()
 								inputGeneral(name, companyName, price, weight);
 								cout << "\n\tСрок годности: ";
 								cin >> expirationDate;
-								newProduct(products, head);
-								products->setProduct(name, companyName, price, weight, open,
-									expirationDateInCloseState, expirationDateInOpenState, expirationDate,
-									typeOfComponent, productType);
+								newProduct(products, head, name, companyName, price, weight,
+									open, expirationDateInCloseState,expirationDateInOpenState, 
+									expirationDate, typeOfComponent, productType);
 								counter++;
 								break;
 							}
@@ -133,10 +135,9 @@ void secondGeneralTask()
 						cin >> productType;
 						cout << "\n\tТип комплетующего: ";
 						cin >> typeOfComponent;
-						newProduct(products, head);
-						products->setProduct(name, companyName, price, weight, open,
-							expirationDateInCloseState, expirationDateInOpenState, expirationDate,
-							typeOfComponent, productType);
+						newProduct(products, head, name, companyName, price, weight,
+							open, expirationDateInCloseState, expirationDateInOpenState,
+							expirationDate, typeOfComponent, productType);
 						counter++;
 						break;
 					}
@@ -150,12 +151,20 @@ void secondGeneralTask()
 			}
 			case (2): {
 				products = head;
-				while (products != NULL) {
+				if (head == NULL) {
+					cout << "\n\tEmpty\n\t";
+					system("pause");
+					break;
+				}
+				int days = 0;
+				while (true) {
 					string temp = *products;
 					cout << "\n\t" << temp;
+					days += products->getExpirationDate();
+					if (products->next == NULL)break;
 					products = products->next;
 				}
-				cout << "\n\t";
+				cout << "\n\tОбщая сумма сроков годности: " << days << "\n\n\t";
 				system("pause");
 				continue;
 			}
