@@ -22,6 +22,7 @@
     <ClCompile Include="ClassesForSecondGeneralTask.cpp" />
     <ClCompile Include="FirstGeneralTask.cpp" />
     <ClCompile Include="IndividualTask.cpp" />
+    <ClCompile Include="ListOfBuyers.cpp" />
     <ClCompile Include="PersonClass.cpp" />
     <ClCompile Include="SecondGeneralTask.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="FirstGeneralTask.h" />
     <ClInclude Include="FunctionsForAnIndividualTask.h" />
     <ClInclude Include="IndividualTask.h" />
+    <ClInclude Include="ListOfBuyers.h" />
     <ClInclude Include="PersonClass.h" />
     <ClInclude Include="SecondGeneralTask.h" />
     <ClInclude Include="ThisIs.h" />
