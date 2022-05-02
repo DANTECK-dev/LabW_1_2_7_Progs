@@ -118,5 +118,17 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class ListOfBuyers {
-
+private:
+	ListItem* person	= NULL;
+	ListItem* head		= NULL;
+	ListItem* tail		= NULL;
+public:
+	void addClients			(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void sortClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void transformClients	(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void delClients			(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void showClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void searchClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void saveClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void downloadClients	(ListItem*& head, ListItem*& tail, ListItem*& clients);
 };

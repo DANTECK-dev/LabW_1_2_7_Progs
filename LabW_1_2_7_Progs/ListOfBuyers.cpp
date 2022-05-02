@@ -88,3 +88,43 @@ ListItem::ListItem(
 	this->prev = prev;
 }
 #pragma endregion
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma region ListOfBuyers
+void ListOfBuyers::addClients			(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+	system("cls");
+	cout << "\n\t1 - Физическое лицо\n\t2 - Юридическое лицо\n\t0 - Выход";
+	int inputNum;
+	cin >> inputNum;
+	switch (inputNum) {
+	case(0): return;
+	case(1): {
+
+	}
+	case(2):
+	default:
+	}
+}
+void ListOfBuyers::sortClients			(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::transformClients		(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::delClients			(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::showClients			(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::searchClients		(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::saveClients			(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+void ListOfBuyers::downloadClients		(ListItem*& head, ListItem*& tail, ListItem*& clients) {
+
+}
+#pragma endregion

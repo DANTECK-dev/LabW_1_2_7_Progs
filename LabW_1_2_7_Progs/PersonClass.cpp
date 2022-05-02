@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "Libraries.h"
 
@@ -819,3 +819,4 @@ void Person::downloadClients	(Person*& head, Person*& tail, Person*& clients)
 	}
 	}
 }
+*/
