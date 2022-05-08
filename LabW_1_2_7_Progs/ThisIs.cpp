@@ -27,69 +27,87 @@ int isInteger(char val)
 
 char isChar(char val)
 {
-	if ( (65 <= int(val) && 90 >= int(val)) || (97 <= int(val) && 122 >= int(val)) || (192 <= int(val) && 255 >= int(val)))
+	try
 	{
-		char N = val;
-		return N;
+		if ((65 <= int(val) && 90 >= int(val)) || (97 <= int(val) && 122 >= int(val)) || (192 <= int(val) && 255 >= int(val)))
+		{
+			char N = val;
+			return N;
+		}
+		else
+		{
+			throw exception("\n\tНеверный тип данных");
+		}
 	}
-	else
+	catch (const exception& err)
 	{
-		throw exception("\n\tНеверный тип данных");
+		cout << "\n\t" << err.what() << "... ";
+		char p = _getch();
+		system("cls");
 	}
 }
 
 int isInteger_l(char *val)
 {
-	int len = strlen(val);
-	bool k = false;
-	int res = 0;
-	int l = 1;
-
-	for (int i = 0; i < len; i++)
-		l *= 10;
-
-	if (val[0] == '-')
+	try
 	{
-		l /= 10;
+		int len = strlen(val);
+		bool k = false;
+		int res = 0;
+		int l = 1;
 
-		for (int i = 1; i < len; i++)
-		{
-			if ( (48 <= int(val[i])) && (57 >= int(val[i])) )
-			{
-				res -= ((val[i]) - 48) * l;
-			}
-			else
-			{
-				k = true;
-				break;
-			}
-		}
-	}
-
-	else
-	{
 		for (int i = 0; i < len; i++)
+			l *= 10;
+
+		if (val[0] == '-')
 		{
-			if ( (48 <= int(val[i])) && 57 >= int(val[i]) )
+			l /= 10;
+
+			for (int i = 1; i < len; i++)
 			{
-				l /= 10;
-				res += ((val[i]) - 48) * l;
-			}
-			else
-			{
-				k = true;
-				break;
+				if ((48 <= int(val[i])) && (57 >= int(val[i])))
+				{
+					res -= ((val[i]) - 48) * l;
+				}
+				else
+				{
+					k = true;
+					break;
+				}
 			}
 		}
-	}
-	if (k == true) 
-	{
-		throw exception("\n\tНеверный тип данных");
-	}
 
-	else
+		else
+		{
+			for (int i = 0; i < len; i++)
+			{
+				if ((48 <= int(val[i])) && 57 >= int(val[i]))
+				{
+					l /= 10;
+					res += ((val[i]) - 48) * l;
+				}
+				else
+				{
+					k = true;
+					break;
+				}
+			}
+		}
+		if (k == true)
+		{
+			throw exception("\n\tНеверный тип данных");
+		}
+
+		else
+		{
+			return res;
+		}
+	}
+	catch (const exception& err)
 	{
-		return res;
+		cout << "\n\t" << err.what() << "... ";
+		char p = _getch();
+		system("cls");
 	}
 }
 

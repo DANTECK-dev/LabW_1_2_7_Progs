@@ -3,14 +3,16 @@
 #include "Libraries.h"
 
 class DataPerson {
-public:
+protected:
 	virtual void setName	(string) = 0;
 	virtual void setInfoNum	(string) = 0;
 	virtual void setPayNum	(string) = 0;
+	virtual void setDataPerson(string, string, string) = 0;
 
 	virtual string getName		() = 0;
 	virtual string getInfoNum	() = 0;
 	virtual string getPayNum	() = 0;
+	virtual string getDataPerson() = 0;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,13 +29,19 @@ public:
 		string mobilePhoneNumber, 
 		string accountNumber
 	);
-	void setName(string FIO)					override { this->FIO				= FIO; };
-	void setInfoNum(string mobilePhoneNumber)	override { this->mobilePhoneNumber	= mobilePhoneNumber; };
-	void setPayNum(string accountNumber)		override { this->accountNumber		= accountNumber; };
+	void setName(string FIO)					override { this->FIO				= FIO; }
+	void setInfoNum(string mobilePhoneNumber)	override { this->mobilePhoneNumber	= mobilePhoneNumber; }
+	void setPayNum(string accountNumber)		override { this->accountNumber		= accountNumber; }
+	void setDataPerson(string FIO, string mobilePhoneNumber, string accountNumber) override {
+		this->FIO = FIO;
+		this->mobilePhoneNumber = mobilePhoneNumber;
+		this->accountNumber = accountNumber;
+	}
 
-	string getName()	override { return FIO; };
-	string getInfoNum() override { return mobilePhoneNumber; };
-	string getPayNum()	override { return accountNumber; };
+	string getName()		override { return FIO; }
+	string getInfoNum()		override { return mobilePhoneNumber; }
+	string getPayNum()		override { return accountNumber; }
+	string getDataPerson()	override { return "ФИО: " + FIO + " Моб. телефон: " + mobilePhoneNumber + " Номер счёта: " + accountNumber; }
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,10 +61,16 @@ public:
 	void setName(string companuName)		override { this->companuName	= companuName; };
 	void setInfoNum(string customerINN)		override { this->customerINN	= customerINN; };
 	void setPayNum(string accountNumber)	override { this->accountNumber	= accountNumber; };
+	void setDataPerson(string companuName, string customerINN, string accountNumber) override {
+		this->companuName = companuName;
+		this->customerINN = customerINN;
+		this->accountNumber = accountNumber;
+	}
 
-	string getName()	override { return companuName; };
-	string getInfoNum() override { return customerINN; };
-	string getPayNum()	override { return accountNumber; };
+	string getName()		override { return companuName; };
+	string getInfoNum()		override { return customerINN; };
+	string getPayNum()		override { return accountNumber; };
+	string getDataPerson()	override { return "Название помпании: " + companuName + " ИНН компании: " + customerINN + " Номер счёта: " + accountNumber; }
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,13 +87,19 @@ private:
 public:
 	DataProduct();
 	DataProduct(
+		bool legalPerson,
 		string productName,
 		string typeOfProduct,
 		string paymentDay,
 		string vendorINN,
 		string companyAddress,
 		int numberOfProduct,
-		int sumOfProduct
+		int sumOfProduct,
+		string FIO,
+		string mobilePhoneNumber,
+		string companuName,
+		string customerINN,
+		string accountNumber
 	);
 	void setProductName		(string productName)	{ this->productName		= productName;		};
 	void setTypeOfProduct	(string typeOfProduct)	{ this->typeOfProduct	= typeOfProduct;	};
@@ -100,15 +120,29 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ListItem : public DataPerson, public DataProduct {
-protected:
+class ListItem : public LegalPerson, public NaturalPerson, public DataProduct {
+public:
 	ListItem* next;
 	ListItem* prev;
+	bool legalPerson;
 public:
 	ListItem();
 	ListItem(
 		ListItem* next,
-		ListItem* prev
+		ListItem* prev,
+		bool legalPerson,
+		string productName,
+		string typeOfProduct,
+		string paymentDay,
+		string vendorINN,
+		string companyAddress,
+		int numberOfProduct,
+		int sumOfProduct,
+		string FIO,
+		string mobilePhoneNumber,
+		string companuName,
+		string customerINN,
+		string accountNumber
 	);
 	void nextItem();
 	void prevItem();
@@ -119,16 +153,18 @@ public:
 
 class ListOfBuyers {
 private:
-	ListItem* person	= NULL;
-	ListItem* head		= NULL;
-	ListItem* tail		= NULL;
+	ListItem* person		= NULL;
+	ListItem* head			= NULL;
+	ListItem* tail			= NULL;
+	string VendorINN		= { "758313399357" };
+	string CompanyAddress	= { "622966, Калининградская область, город Кашира, пл. Балканская, 27" };
 public:
-	void addClients			(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void sortClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void transformClients	(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void delClients			(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void showClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void searchClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void saveClients		(ListItem*& head, ListItem*& tail, ListItem*& clients);
-	void downloadClients	(ListItem*& head, ListItem*& tail, ListItem*& clients);
+	void addClients			(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void sortClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void transformClients	(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void delClients			(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void showClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void searchClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void saveClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
+	void downloadClients	(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
 };
