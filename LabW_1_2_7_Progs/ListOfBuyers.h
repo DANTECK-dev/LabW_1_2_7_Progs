@@ -152,8 +152,12 @@ private:
 	ListItem* tail			= NULL;
 	string VendorINN		= { "758313399357" };
 	string CompanyAddress	= { "622966, Калининградская область, город Кашира, пл. Балканская, 27" };
+	void swapAndDelClients();
+	void transform();
+	void show();
 public:
 	void operator[]			(const int index);
+	operator int () const;
 	void addClients			(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
 	void sortClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
 	void transformClients	(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);

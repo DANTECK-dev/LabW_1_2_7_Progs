@@ -153,7 +153,21 @@ void ListOfBuyers::operator[](const int index) {
 		LItemp = LItemp->next;
 	LItemp->operator<<(cout);
 }
-
+ListOfBuyers::operator int() const {
+	ListItem* LItemp = this->head;
+	int counter = 0;
+	if (LItemp == NULL) {
+		cout << counter;
+	} else {
+		while (true) {
+			counter++;
+			if (LItemp->next = NULL) break;
+			LItemp = LItemp->next;
+		}
+		cout << counter;
+	}
+	return;
+}
 void ListOfBuyers::addClients			() {
 	system("cls");
 	cout << "\n\n\tДобавление клиента\n";
@@ -395,7 +409,8 @@ void ListOfBuyers::sortClients			() {
 				person = person->next;
 			}
 		}
-	} else if (person == head && person->next != tail) {
+	} 
+	else if (person == head && person->next != tail) {
 		for (int i = 1; i < counter; i++)
 		{
 			person = head;
@@ -418,7 +433,8 @@ void ListOfBuyers::sortClients			() {
 				person = person->next;
 			}
 		}
-	} else if (person != head && person->next == tail) {
+	} 
+	else if (person != head && person->next == tail) {
 		for (int i = 1; i < counter; i++)
 		{
 			person = head;
@@ -441,7 +457,8 @@ void ListOfBuyers::sortClients			() {
 				person = person->next;
 			}
 		}
-	} else if (person != head && person->next != tail) {
+	} 
+	else if (person != head && person->next != tail) {
 		for (int i = 1; i < counter; i++)
 		{
 			person = head;
@@ -472,14 +489,68 @@ void ListOfBuyers::sortClients			() {
 	return;
 }
 
+void ListOfBuyers::transform() {
+	cout << "\n\n\t\tКакие данные изменить\n"
+		<< "\n\t\tДанные покупателя\n";
+	if (person->legalPerson) {
+		cout << "\n\t1. Название компании - " << person->LegalPerson::getName()
+			<< "\n\t2. Номер ИНН" << person->LegalPerson::getInfoNum()
+			<< "\n\t3. Номер счёта - " << person->LegalPerson::getPayNum();
+	} else {
+		cout << "\n\t1. ФИО - " << person->NaturalPerson::getName()
+			<< "\n\t2. Номер телефона" << person->NaturalPerson::getInfoNum()
+			<< "\n\t3. Номер счёта - " << person->NaturalPerson::getPayNum();
+	}
+	cout << "\n\t\tДанные продукта\n"
+		<< "\n\t5. Название продукта - " << person->getProductName()
+		<< "\n\t6. Тип продукта - " << person->getTypeOfProduct()
+		<< "\n\t7. День оплаты (ДД.ММ.ГГГГ) - " << person->getPaymentDay()
+		<< "\n\t8. Кол-во продуктов - " << person->getNumberOfProduct()
+		<< "\n\t9. Сумму покупки - " << person->getSumOfProduct()
+		<< "\n\t0. Выход\n\n\t";
+	char InIntt;
+	cin >> InIntt;
+
+	int InInt = isInteger(InIntt);
+
+	switch (InInt) {
+		case(0): return;
+		case(1): {
+			if (person->legalPerson) {
+				cout << "\n\n\tВведите ФИО: ";
+				string name, surname, pathr;
+				cin.get(); getline(cin, surname); 
+				getline(cin, name); 
+				getline(cin, pathr);
+			}
+				break; 
+			}
+		case(2): {cout << "\n\n\tВведите Имя: ";			cin.get(); getline(cin, clients->DATA.Name); 		break; }
+		case(3): {cout << "\n\n\tВведите Отчество: ";		cin.get(); getline(cin, clients->DATA.Patronymic);	break; }
+		case(4): {cout << "\n\n\tВведите Адресс: ";			cin.get(); getline(cin, clients->DATA.Address); 	break; }
+		case(5): {cout << "\n\n\tВведите Телефонный: ";		cin.get(); getline(cin, clients->DATA.PhoneNum); 	break; }
+		case(6): {cout << "\n\n\tВведите День: ";			cin.get(); getline(cin, clients->DATA.PayDay);		break; }
+		case(7): {cout << "\n\n\tВведите Сумму: ";			cin.get();		   cin >> clients->DATA.Summ;		break; }
+		default: {
+			throw exception("\n\n\tВведено неверное значение, нажмите любую клавишу для возврата в меню... ");
+		}
+	}
+	system("cls");
+}
 void ListOfBuyers::transformClients		() {
 
 }
 
+void ListOfBuyers::swapAndDelClients() {
+
+}
 void ListOfBuyers::delClients			() {
 
 }
 
+void ListOfBuyers::show() {
+
+}
 void ListOfBuyers::showClients			() {
 
 }
