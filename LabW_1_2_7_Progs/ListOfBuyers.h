@@ -18,7 +18,7 @@ protected:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class NaturalPerson : public DataPerson {
-private:
+protected:
 	string FIO;
 	string mobilePhoneNumber;
 	string accountNumber;
@@ -47,7 +47,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class LegalPerson : public DataPerson {
-private:
+protected:
 	string companuName;
 	string customerINN;
 	string accountNumber;
@@ -76,7 +76,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class DataProduct {
-private:
+protected:
 	string productName;
 	string typeOfProduct;
 	string paymentDay;
@@ -87,19 +87,13 @@ private:
 public:
 	DataProduct();
 	DataProduct(
-		bool legalPerson,
 		string productName,
 		string typeOfProduct,
 		string paymentDay,
 		string vendorINN,
 		string companyAddress,
 		int numberOfProduct,
-		int sumOfProduct,
-		string FIO,
-		string mobilePhoneNumber,
-		string companuName,
-		string customerINN,
-		string accountNumber
+		int sumOfProduct
 	);
 	void setProductName		(string productName)	{ this->productName		= productName;		};
 	void setTypeOfProduct	(string typeOfProduct)	{ this->typeOfProduct	= typeOfProduct;	};
@@ -116,11 +110,12 @@ public:
 	string  getCompanyAddress()	{ return this->companyAddress;	};
 	int		getNumberOfProduct(){ return this->numberOfProduct;	};
 	int		getSumOfProduct()	{ return this->sumOfProduct;	};
+	string	getDataProduct();
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ListItem : public LegalPerson, public NaturalPerson, public DataProduct {
+class ListOfBuyers : public LegalPerson, public NaturalPerson, public DataProduct {
 public:
 	ListItem* next;
 	ListItem* prev;
@@ -146,7 +141,7 @@ public:
 	);
 	void nextItem();
 	void prevItem();
-
+	ostream& operator << (ostream& os);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +154,7 @@ private:
 	string VendorINN		= { "758313399357" };
 	string CompanyAddress	= { "622966, Калининградская область, город Кашира, пл. Балканская, 27" };
 public:
+	void operator[]			(const int index);
 	void addClients			(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
 	void sortClients		(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
 	void transformClients	(/*ListItem*& head, ListItem*& tail, ListItem*& clients*/);
