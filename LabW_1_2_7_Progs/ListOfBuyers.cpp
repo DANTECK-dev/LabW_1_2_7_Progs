@@ -148,10 +148,10 @@ ostream& ListItem::operator << (ostream& os) {
 
 #pragma region ListOfBuyers
 void ListOfBuyers::operator[](const int index) {
-	ListOfBuyers* LItemp = this->head;
+	ListItem* LItemp = this->head;
 	for (int i = 0; i < index; i++)
 		LItemp = LItemp->next;
-	
+	LItemp->operator<<(cout);
 }
 
 void ListOfBuyers::addClients			() {
