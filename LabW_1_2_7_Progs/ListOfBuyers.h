@@ -115,12 +115,11 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ListOfBuyers : public LegalPerson, public NaturalPerson, public DataProduct {
+class ListItem : public LegalPerson, public NaturalPerson, public DataProduct {
 public:
 	ListItem* next;
 	ListItem* prev;
 	bool legalPerson;
-public:
 	ListItem();
 	ListItem(
 		ListItem* next,
