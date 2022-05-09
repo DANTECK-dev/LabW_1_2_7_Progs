@@ -66,11 +66,12 @@ public:
 		this->customerINN = customerINN;
 		this->accountNumber = accountNumber;
 	}
-
 	string getName()		override { return companuName; };
 	string getInfoNum()		override { return customerINN; };
 	string getPayNum()		override { return accountNumber; };
-	string getDataPerson()	override { return "Название помпании: " + companuName + " ИНН компании: " + customerINN + " Номер счёта: " + accountNumber; }
+	string getDataPerson()	override { return "Название компании: " 
+		+ companuName + " ИНН компании: " 
+		+ customerINN + " Номер счёта: " + accountNumber; }
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,6 +142,7 @@ public:
 	void nextItem();
 	void prevItem();
 	ostream& operator << (ostream& os);
+	istream& operator >> (ostream& os);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

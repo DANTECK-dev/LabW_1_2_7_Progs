@@ -119,5 +119,6 @@
 	 return os << p.name << " " << p.age;
 	}
 */
+//7 laba
 
 void individualTask();
