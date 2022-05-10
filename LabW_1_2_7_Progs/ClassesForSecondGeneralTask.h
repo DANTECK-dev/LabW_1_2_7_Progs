@@ -1,131 +1,120 @@
 #pragma once
 #include "Libraries.h"
 
-class General {
+class Product {
+public:
+	virtual operator string() const = 0;
+	virtual void show() = 0;
+	virtual int GetAny() = 0;
+};
+
+class ProductFood :Product {
 protected:
-	string	name;
-	string	companyName;
-	int		price;
-	int		weight;
+	int Days;
+	string classfood;
 public:
-	General();
-	General(string name, string companyName, int price, int weight);
-	string getGeneral();
-	/*void setName(string name);
-	void setCompanyName(string companyName);
-	void setPrice(int price);
-	void setWeight(int weight);*/
+	ProductFood() {
+		classfood = "*";
+	}
+	ProductFood(int Days, string classfood) {
+		this->Days = Days;
+		this->classfood = classfood;
+	}
+	operator string() const override {
+		return to_string(Days);
+	}
+	void show() override {
+		cout << "Days: " << Days << endl;
+		cout << "classfood: " << classfood << endl;
+	}
+	int GetAny() override {
+		return Days;
+	}
 };
 
+class FreshProduct :ProductFood {
+public:
+	FreshProduct() :ProductFood(Days, classfood) {
+		this->Days = Days;
+		this->classfood = classfood;
+	}
+};
 
-class CannedProduct : General{
+class CannedFood :ProductFood {
 protected:
-	int expirationDateInOpenState;
-	int expirationDateInCloseState;
-	bool open;
+	int daysClose;
+	int daysOpen;
+	bool Close;
 public:
-	CannedProduct();
-	CannedProduct(string name, string companyName, int price, int weight,
-		int expirationDateInOpenState, int expirationDateInCloseState, bool open);
-	string getCannedProduct();
-	/*void setExpirationDateInOpenState(int expirationDateInOpenState);
-	void setExpirationDateInCloseState(int expirationDateInCloseState);
-	void setOpen(bool open);
-	void setCannedProduct(string name,
-		string companyName,
-		int price,
-		int weight);*/
+	CannedFood() {
+		daysClose = 0;
+		daysOpen = 0;
+		Close = false;
+	}
+	CannedFood(int daysClose, int daysOpen, bool Close) :ProductFood(Days, classfood) {
+		this->daysClose = daysClose;
+		this->daysOpen = daysOpen;
+		this->Close = Close;
+		this->Days = Days;
+		this->classfood = classfood;
+	}
+	void show() override {
+		cout << "DaysClose: " << daysClose << endl;
+		cout << "DaysOpen: " << daysOpen << endl;
+		cout << "Close: " << Close << endl;
+		cout << "Days: " << Days << endl;
+		cout << "ClassFood" << classfood << endl;
+	}
 };
 
-
-class FreshProduct : General {
+class EleProduct :Product {
 protected:
-	int expirationDate;
+	string TypeProduct;
+	int TypeP;
 public:
-	FreshProduct();
-	FreshProduct(string name, string companyName, int price, int weight, int expirationDate);
-	string getFreshProduct();
-	/*void setExpirationDate(int expirationDate);
-	void setFreshProduct(string name,
-		string companyName,
-		int price,
-		int weight);*/
+	EleProduct() {
+		TypeProduct = "*";
+	}
+	EleProduct(string TypeProduct, int TypeP) {
+		this->TypeProduct = TypeProduct;
+		this->TypeP = TypeP;
+	}
+	operator string() const override {
+		return "TypeP: " + to_string(TypeP) + "\n" + "TypeProduct: " + TypeProduct;
+	}
+	void show() override {
+		cout << "TypeProduct: " << TypeProduct << endl;
+		cout << "TypeP: " << TypeP << endl;
+	}
+	int GetAny() override {
+		return TypeP;
+	}
 };
 
-
-class FoodProduct : CannedProduct , FreshProduct{
-public:
-	FoodProduct();
-	FoodProduct(string name, string companyName, int price, int weight,
-		int expirationDateInOpenState, int expirationDateInCloseState, bool open, int expirationDate);
-	virtual int getExpirationDate();
-	string getFoodProduct();
-	/*void setFoodProduct(string name,
-		string companyName,
-		int price,
-		int weight,
-		int expirationDateInOpenState,
-		int expirationDateInCloseState, 
-		bool open,
-		int expirationDate);*/
-};
-
-
-class Accessories : General {
+class AccesProduct : EleProduct {
 protected:
-	string typeOfComponent;	// of which it is a part
+	string TypeAcces;
 public:
-	Accessories();
-	Accessories(string name, string companyName, int price, int weight, string typeOfComponent);
-	string getAccessories();
-	/*void setTypeOfComponent(string typeOfComponent);
-	void setAccessories(string name,
-		string companyName,
-		int price,
-		int weight);*/
+	AccesProduct() {
+		TypeAcces = "*";
+	}
+	AccesProduct(string TypeAcces) :EleProduct(TypeProduct, TypeP) {
+		this->TypeAcces = TypeAcces;
+		this->TypeProduct = TypeProduct;
+		this->TypeP = TypeP;
+	}
+
+	void show() override {
+		cout << "TypeProduct: " << TypeProduct << endl;
+		cout << "TypeAcces: " << TypeAcces << endl;
+		cout << "TypeP: " << TypeP << endl;
+	}
 };
 
+int Days(ProductFood* masF, int count) {
+	return masF[count].GetAny() * 365;
+}
 
-class ElectronicGoods : Accessories{
-protected:
-	string productType;
-public:
-	ElectronicGoods();
-	ElectronicGoods(string name, string companyName, int price,
-		int weight, string typeOfComponent, string productType);
-	string getElectronicGoods();
-	/*void setProductType(string productType);
-	void setElectronicGoods(
-		string name,
-		string companyName,
-		int price,
-		int weight,
-		string typeOfComponent);*/
-};
-
-
-class Product : public FoodProduct, public ElectronicGoods{
-public:
-	//Абстрактный класс
-	Product* next = NULL;
-	Product* prev = NULL;
-	Product();
-	int getExpirationDate() {return FoodProduct::getExpirationDate();}
-	Product(string name, string companyName, int price, int weight, bool open, int expirationDateInCloseState,
-		int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType);
-	operator string () const;
-	/*void newProduct(string name, string companyName, int price, int weight, bool open, int expirationDateInCloseState,
-		int expirationDateInOpenState, int expirationDate, string typeOfComponent, string productType);
-	void setProduct (
-		string name,
-		string companyName,
-		int price,
-		int weight,
-		bool open,
-		int expirationDateInCloseState,
-		int expirationDateInOpenState,
-		int expirationDate,
-		string typeOfComponent,
-		string productType
-	);*/
-};
+string GetData(EleProduct* masE, int count) {
+	return masE->operator std::string();
+}
